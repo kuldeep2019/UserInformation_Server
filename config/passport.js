@@ -1,9 +1,11 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var jwt = require('jsonwebtoken');
 var mongo = require('mongoskin');
 var configAuth = require('./auth'); // use this one for testing
 var fs = require('fs');
 var path = require('path');
+var config = require('../config/config.json');
 var db = mongo.db(config.connectionString, { native_parser: true });    // mongodb connectivity
 db.bind('users');
 

@@ -23,24 +23,23 @@ module.exports = function (app, passport) {
         }),
        );
        app.get('/auth/facebook', passport.authenticate('facebook', {
-        // scope: [
-        //     'https://www.facebookapis.com/auth/userinfo.profile',
-        //     'https://www.facebookapis.com/auth/userinfo.email',
-        //     // 'https://www.googleapis.com/auth/contacts.readonly'
-        // ]
+        scope: [
+            'https://www.facebookapis.com/auth/userinfo.profile',
+            'https://www.facebookapis.com/auth/userinfo.email',
+            // 'https://www.googleapis.com/auth/contacts.readonly'
+        ]
     }));
         app.get('/auth/facebook/callback',
     
             passport.authenticate('facebook', 
-            // {
-    
-                
-            //     failureRedirect: 'https://localhost:4200/authentication/register',
-            //     session: false
+            {
+     
+                failureRedirect: 'https://localhost:4200/authentication/register',
+                session: false
                
-            // }
-            { successRedirect: '/profile',
-            failureRedirect: '/login' }
+            }
+            // { successRedirect: '/profile',
+            // failureRedirect: '/login' }
             
             ),
         function (req, res) {

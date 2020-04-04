@@ -19,6 +19,7 @@
     "mongoose": "^5.9.7",
     "mongoskin": "^2.1.0",
     "passport-facebook-token": "^3.3.0",
+    "passport-google-oauth": "^2.0.0",
     "path": "^0.12.7",
     "q": "^1.5.1",
     "request": "^2.88.2",

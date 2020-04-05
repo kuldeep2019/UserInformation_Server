@@ -12,7 +12,7 @@ module.exports = function (app, passport) {
         scope: [
             'https://www.facebookapis.com/auth/userinfo.profile',
             'https://www.facebookapis.com/auth/userinfo.email',
-            // 'https://www.googleapis.com/auth/contacts.readonly'
+            // 'https://www.facebookapis.com/auth/contacts.readonly'
         ]
      
     }));

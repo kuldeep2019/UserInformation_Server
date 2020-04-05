@@ -20,8 +20,11 @@ module.exports = function (passport) {
 
     },
         function (req, token, refreshToken, profile, done) {
-            console.log("response: ",token, refreshToken, profile, done)
-            return done(null, profile)
+            console.log("response: ",profile.displayName,profile.emails[0].value,profile.photos[0].value)
+            process.nextTick(function () {
+                //Check whether the User exists or not using profile.id
+                return done(null, profile);
+              });
         }))
     //Facebook
     passport.use(new FacebookStrategy({
@@ -33,7 +36,7 @@ module.exports = function (passport) {
         passReqToCallback: true
     },
         function (req, token, refreshToken, profile, done) {
-            console.log("response: ",token, refreshToken, profile, done)
+            // console.log("response: ",profile)
             return done(null, profile)
         })); 
 };

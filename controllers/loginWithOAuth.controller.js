@@ -17,15 +17,18 @@ module.exports = function (app, passport) {
 
         passport.authenticate('google', {
 
-            failureRedirect: 'https://localhost:4200/authentication/register',
+            failureRedirect: 'http://localhost:4200',
             session: false
            
         }),
-       );
+        function (req, res) {
+            console.log("login with google oAuth hitted!!!!",res.req.user)
+            res.redirect("http://localhost:4200/pages/pages/google-UserInfo-Form?fullName=" + res.req.user.displayName + "&email=" + res.req.user.emails[0].value + "&photo=" + res.req.user.photos[0].value);
+        })
        app.get('/auth/facebook',
   passport.authenticate('facebook',
   {
-  failureRedirect: "/fail"
+  failureRedirect: "http://localhost:4200"
   }
   ));
     //    app.get('/auth/facebook', passport.authenticate('facebook', {
@@ -49,7 +52,7 @@ module.exports = function (app, passport) {
             
             ),
         function (req, res) {
-            console.log("login with oAuth hitted!!!!")
+            console.log("login with facebook oAuth hitted!!!!",res)
         })
 
 

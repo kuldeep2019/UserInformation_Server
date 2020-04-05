@@ -43,7 +43,7 @@ module.exports = function (app, passport) {
             passport.authenticate('facebook', 
             {
      
-                failureRedirect: 'https://localhost:4200',
+                failureRedirect: 'http://localhost:4200',
                 session: false
                
             }
@@ -52,7 +52,8 @@ module.exports = function (app, passport) {
             
             ),
         function (req, res) {
-            console.log("login with facebook oAuth hitted!!!!",res)
+            console.log("login with facebook oAuth hitted!!!!",res.req.user,res.req.user.name.givenName)
+            res.redirect("http://localhost:4200/pages/pages/facebook-UserInfo-Form?surName=" + res.req.user.name.familyName + "&firstName=" + res.req.user.name.givenName);
         })
 
 

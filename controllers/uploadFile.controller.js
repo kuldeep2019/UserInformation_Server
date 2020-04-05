@@ -28,3 +28,5 @@ router.post('/upload', upload.array("file"), fileUpload);
 function fileUpload(req, res) {
     res.status(200).send({data:"File Uploaded"});
 }
+
+module.exports = router;

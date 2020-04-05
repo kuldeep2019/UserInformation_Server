@@ -29,8 +29,8 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 //app.use('/api/users',require('./controllers/svr.user.controller'))
 require('./controllers/loginWithOAuth.controller.js')(app, passport); // load our routes and pass in our app and fully configured passport
-app.use('/api/uploads',require('./controllers/uploadFile.controller'));
-app.use('/uploadsattachment', express.static(__dirname + '/aadharFiles'));
+app.use('/api/uploads',require('./controllers/fileOperations.controller'));
+app.use('/aadharFiles', express.static(__dirname + '/aadharFiles'));
 app.get('/',(req,res)=>{
     res.send('footer')
 })

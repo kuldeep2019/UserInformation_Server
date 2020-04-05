@@ -43,7 +43,7 @@ module.exports = function (app, passport) {
             passport.authenticate('facebook', 
             {
      
-                failureRedirect: 'https://localhost:4200/authentication/register',
+                failureRedirect: 'https://localhost:4200',
                 session: false
                
             }

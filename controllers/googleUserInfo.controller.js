@@ -9,6 +9,7 @@ var router = express.Router();
 var userInfoService = require("../services/userInfoService");
 
 router.post('/googleUserInfo', googleUserInfo);
+router.get('/getGoogleUserDetails',getUserDetails)
 module.exports = router;
 
 /** 
@@ -18,6 +19,19 @@ module.exports = router;
  */
 function googleUserInfo(req, res) {
     userInfoService.googleUserInfo(req).then(function(data) {
+            res.send(data);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
+}
+/** 
+ * @author:Madhu Jha
+ * @argument:None
+ * @description:Get User Info.
+ */
+function getUserDetails(req, res) {
+    userInfoService.getUserDetails(req).then(function(data) {
             res.send(data);
         })
         .catch(function(err) {

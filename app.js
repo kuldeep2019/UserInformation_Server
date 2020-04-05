@@ -31,6 +31,7 @@ app.use(passport.session()); // persistent login sessions
 require('./controllers/loginWithOAuth.controller.js')(app, passport); // load our routes and pass in our app and fully configured passport
 app.use('/api/uploads',require('./controllers/fileOperations.controller'));
 app.use('/api/googleUserInfo',require('./controllers/googleUserInfo.controller'));
+app.use('/api/getUserDetails',require('./controllers/googleUserInfo.controller'));
 app.use('/api/fileOperations',require('./controllers/fileOperations.controller'));
 app.use('/aadharFiles', express.static(__dirname + '/aadharFiles'));
 app.get('/',(req,res)=>{

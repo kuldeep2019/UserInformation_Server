@@ -27,9 +27,9 @@ var upload = multer({ storage: storage})
 
 router.post('/upload', upload.array("file"), fileUpload);
 
-router.get('/download/:fileName', function (req, res, next) {
+router.post('/download', function (req, res, next) {
     console.log("Download file")
-    filepath = path.join(__dirname, "../aadharFiles") + "/" + req.params.fileName;
+    filepath = path.join(__dirname, "../aadharFiles") + "/" + req.body.fileName;
     res.sendFile(filepath);
 });
 

@@ -31,31 +31,6 @@ module.exports = function (app, passport) {
              ),
         function (req, res) {
             console.log("login with oAuth hitted!!!!")
-            // console.log("###########################          ", req);
-            var token = res.req.user.token;
-            var emailId = res.req.user.user.email;
-
-            var username = res.req.user.user.username;
-            var flagForOAuth = res.req.user.user.flagForOAuth;
-            var accessToken = res.req.user.accessToken;
-            console.log("thats the only thing i want          ", res.req.user.accessToken);
-
-            // console.log()
-            if (flagForOAuth == 1) {
-                console.log("***********NEW USER*********************")
-                res.redirect("https://localhost:4200/authentication/details-page/contactDetails1/" + token + "/" + emailId + "/" + username + "/" + accessToken);
-
-            }
-            else if (flagForOAuth == 0) {
-                var mobileNo = res.req.user.user.mobileNo;
-                console.log("***********REGISTERED USER*********************")
-                res.redirect("https://localhost:4200/authentication/details-page/contactDetails1/" + token + "/" + emailId + "/" + username + "/" + accessToken);
-            }
-            else {
-                console.log("***********SOME ISSUE OCCURED*********************")
-
-            }
-
         })
 
     //google

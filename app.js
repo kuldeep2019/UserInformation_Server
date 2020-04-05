@@ -6,12 +6,23 @@ var mongoose = require('mongoose')
 var bodyparser = require('body-parser')
 var cors = require('cors')
 var path = require('path')
-var config = require('./config/config.json');
+var fs = require('fs');
+var config = require('./config/config');
 var session = require('express-session');
 var app = express();
+var spdy = require('spdy');
 var passport = require('passport'); //used to setup configurations for oAuth
 require('./config/passport')(passport); // pass passport for configuration
-const port = config.port
+// const port = config.port
+
+var credentials = {
+    key: fs.readFileSync('../certs/key.pem'),
+    cert: fs.readFileSync('../certs/cert.pem'),
+    ca: fs.readFileSync('../certs/csr.pem'),
+    spdy: {
+        protocols: ['h2', 'spdy/3.1', 'http/1.1']
+    }
+};
 app.use(cors())
 app.use(bodyparser.json())
 app.use(passport.initialize());
@@ -22,6 +33,14 @@ require('./controllers/loginWithOAuth.controller.js')(app, passport); // load ou
 app.get('/',(req,res)=>{
     res.send('footer')
 })
-app.listen(port,() => {
-    console.log("Server started at port:"+port)
+app.get('/get',(req,res)=>{
+    console.log("server")
+    res.send("send")
 })
+var server = spdy.createServer(credentials, app);
+const port = process.env.PORT || config.port;
+server.listen(port);
+console.log("Server listening on https://", port);
+// app.listen(port,() => {
+//     console.log("Server started at port:"+port)
+// })

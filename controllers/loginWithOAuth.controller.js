@@ -22,13 +22,19 @@ module.exports = function (app, passport) {
            
         }),
        );
-       app.get('/auth/facebook', passport.authenticate('facebook', {
-        scope: [
-            'https://www.facebookapis.com/auth/userinfo.profile',
-            'https://www.facebookapis.com/auth/userinfo.email',
-            // 'https://www.googleapis.com/auth/contacts.readonly'
-        ]
-    }));
+       app.get('/auth/facebook',
+  passport.authenticate('facebook',
+  {
+  failureRedirect: "/fail"
+  }
+  ));
+    //    app.get('/auth/facebook', passport.authenticate('facebook', {
+    //     scope: [
+    //         'https://www.facebookapis.com/auth/userinfo.profile',
+    //         'https://www.facebookapis.com/auth/userinfo.email',
+    //         // 'https://www.googleapis.com/auth/contacts.readonly'
+    //     ]
+    // }));
         app.get('/auth/facebook/callback',
     
             passport.authenticate('facebook', 

@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var multer = require('multer');
+var mkdirp = require('mkdirp');
 
 var storage = multer.diskStorage({
     // destination

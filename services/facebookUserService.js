@@ -35,7 +35,7 @@ function getfacebookUserInfo(req,res){
     console.log("requestedData is",req.body)
 
     var deffered = Q.defer();
-    var userName = req.body;
+    var fullName = req.body.userName;
 //    db.UserInfo.find({},function(err,res){
 //        console.log("response",res)
 //        if(err) deffered.reject(err);
@@ -43,7 +43,7 @@ function getfacebookUserInfo(req,res){
 //         deffered.resolve(res);
 //        } 
 //    })
-   db.FacebookUserInfo.find({fullName:userName}).toArray(function (err, user) {
+   db.FacebookUserInfo.find({fullName:fullName}).toArray(function (err, user) {
     if (err) deffered.reject(err.name + ': ' + err.message);
     console.log("response",user)
     deffered.resolve(user);

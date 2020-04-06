@@ -9,7 +9,7 @@ var Q = require('q');
 var mongo = require('mongoskin');
 var config = require('../config/config')
 var db = mongo.db(config.connectionString, { native_parser: true });    // mongodb connectivity
-db.bind('FacebookUserInfo');
+db.bind('FacebookUserInfo'); // add collection in DB
 
 service.facebookUserInfo = facebookUserInfo;
 service.getfacebookUserInfo = getfacebookUserInfo;

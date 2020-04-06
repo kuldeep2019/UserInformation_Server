@@ -16,9 +16,9 @@ require('./config/passport')(passport); // pass passport for configuration
 // const port = config.port
 
 var credentials = {
-    key: fs.readFileSync('../certs/key.pem'),
-    cert: fs.readFileSync('../certs/cert.pem'),
-    ca: fs.readFileSync('../certs/csr.pem'),
+    key: fs.readFileSync('./certs/key.pem'),
+    cert: fs.readFileSync('./certs/cert.pem'),
+    ca: fs.readFileSync('./certs/csr.pem'),
     spdy: {
         protocols: ['h2', 'spdy/3.1', 'http/1.1']
     }
@@ -27,13 +27,16 @@ app.use(cors())
 app.use(bodyparser.json())
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-//app.use('/api/users',require('./controllers/svr.user.controller'))
 require('./controllers/loginWithOAuth.controller.js')(app, passport); // load our routes and pass in our app and fully configured passport
-app.use('/api/uploads',require('./controllers/fileOperations.controller'));
+app.use('/api/uploads',require('./controllers/fileOperations.controller')); // uplaod file
+// for google
 app.use('/api/googleUserInfo',require('./controllers/googleUserInfo.controller'));
 app.use('/api/getUserDetails',require('./controllers/googleUserInfo.controller'));
-app.use('/api/fileOperations',require('./controllers/fileOperations.controller'));
-app.use('/aadharFiles', express.static(__dirname + '/aadharFiles'));
+//for facebook
+app.use('/api/facebookUserInfo',require('./controllers/facebookUserInfo.controller'));
+app.use('/api/getfacebookUserInfo',require('./controllers/facebookUserInfo.controller'));
+app.use('/api/fileOperations',require('./controllers/fileOperations.controller')); //upload file
+app.use('/aadharFiles', express.static(__dirname + '/aadharFiles'));//  download file
 app.get('/',(req,res)=>{
     res.send('footer')
 })
@@ -45,6 +48,3 @@ var server = spdy.createServer(credentials, app);
 const port = process.env.PORT || config.port;
 server.listen(port);
 console.log("Server listening on https://", port);
-// app.listen(port,() => {
-//     console.log("Server started at port:"+port)
-// })

@@ -1,6 +1,6 @@
 /**
  * Created By :- Madhu Jha
- * Created Date :- 05--2020 8:18 pm
+ * Created Date :- 06--2020 3:10 pm
  * Version :- 1.0
  */
 
@@ -9,19 +9,19 @@ var Q = require('q');
 var mongo = require('mongoskin');
 var config = require('../config/config')
 var db = mongo.db(config.connectionString, { native_parser: true });    // mongodb connectivity
-db.bind('UserInfo');
+db.bind('FacebookUserInfo');
 
-service.googleUserInfo = googleUserInfo;
-service.getUserDetails = getUserDetails;
+service.facebookUserInfo = facebookUserInfo;
+service.getfacebookUserInfo = getfacebookUserInfo;
 module.exports = service;
 
 // Insert User Info in DB
-function googleUserInfo(req,res){
+function facebookUserInfo(req,res){
     var deffered = Q.defer();
     console.log("req",req.body)
     var data = req.body;
     
-   db.UserInfo.insert(data,function(err,res){
+   db.FacebookUserInfo.insert(data,function(err,res){
        if(err) deffered.reject(err);
        else{
         deffered.resolve(res);
@@ -31,7 +31,7 @@ function googleUserInfo(req,res){
 }
 
 // Get User Details from DB
-function getUserDetails(req,res){
+function getfacebookUserInfo(req,res){
     console.log("requestedData is",req.body)
 
     var deffered = Q.defer();
@@ -43,7 +43,7 @@ function getUserDetails(req,res){
 //         deffered.resolve(res);
 //        } 
 //    })
-   db.UserInfo.find({fullName:userName}).toArray(function (err, user) {
+   db.FacebookUserInfo.find({fullName:userName}).toArray(function (err, user) {
     if (err) deffered.reject(err.name + ': ' + err.message);
     console.log("response",user)
     deffered.resolve(user);

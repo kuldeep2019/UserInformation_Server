@@ -1,15 +1,15 @@
 /**
  * Created By :- Madhu Jha
- * Created Date :- 05--2020 8:11 pm
+ * Created Date :- 06--2020 02:11 am
  * Version :- 1.0
  */
 
 var express = require("express");
 var router = express.Router();
-var userInfoService = require("../services/userInfoService");
+var userInfoService = require("../services/facebookUserService");
 
-router.post('/googleUserInfo', googleUserInfo);
-router.post('/getUserDetails',getUserDetails)
+router.post('/facebookUserInfo', facebookUserInfo);
+router.post('/getfacebookUserInfo',getfacebookUserInfo)
 module.exports = router;
 
 /** 
@@ -17,8 +17,8 @@ module.exports = router;
  * @argument:None
  * @description:Provide User Info.
  */
-function googleUserInfo(req, res) {
-    userInfoService.googleUserInfo(req).then(function(data) {
+function facebookUserInfo(req, res) {
+    userInfoService.facebookUserInfo(req).then(function(data) {
             res.send(data);
         })
         .catch(function(err) {
@@ -30,10 +30,10 @@ function googleUserInfo(req, res) {
  * @argument:None
  * @description:Get User Info.
  */
-function getUserDetails(req, res) {
+function getfacebookUserInfo(req, res) {
     console.log("req in controller",req.query.params);
     console.log("req in controller",req.params);
-    userInfoService.getUserDetails(req).then(function(data) {
+    userInfoService.getfacebookUserInfo(req).then(function(data) {
             res.send(data);
         })
         .catch(function(err) {
